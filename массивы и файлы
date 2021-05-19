@@ -1,0 +1,61 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    ifstream in;
+    ofstream out;
+
+    int size_str, size_stl;
+
+    in.open("array.txt");
+    out.open("array2.txt");
+
+    in >> size_str >> size_stl;
+
+    int** array = new int* [size_str];
+    for (int i = 0; i < size_str; i++)
+        array[i] = new int[size_stl];
+
+    int max = 0;
+
+    cout << "дан массив:" << endl;
+
+    int mod, elemi, elemz;
+    int maximum = 0;
+
+    for (int i = 0; i < 3; i++) {
+        for (int z = 0; z < 5; z++) {
+
+            in >> array[i][z];
+            cout << array[i][z] << " ";
+
+            mod = array[i][z];
+
+            if (array[i][z] < 0)
+                mod = mod * (-1);
+
+            if (mod > max) {
+                maximum = array[i][z];
+                max = mod;
+                elemi = i;
+                elemz = z;
+            }
+
+            if (array[i][z] % 3 == 0)
+                out << array[i][z] << " ";
+        }
+        cout << endl;
+    }
+        
+    in.close();
+    out.close();
+
+    cout << endl << endl << "максимальный по модулю элемент в этом массиве = " << max << ", его индекс: " << elemi << " " << elemz;
+
+    return 0;
+}
