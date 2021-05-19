@@ -1,0 +1,83 @@
+//создается структура и массив из структур.
+//пользователь заполняет массив из структур с клавиатуры.
+//данные заполняются в файл.
+//данные считываются с файла и выводятся в консоль.
+
+//как происходит вывод:
+//данные считываются как строка, учитывая пробелы, и данные выводятся до тех пор, пока файл не закончится.
+
+#include <iostream>
+#include <cstring>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+struct sous {
+    string name;
+    string taste;
+    int size;
+    string salt;
+};
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+
+    ///////////////////////////////////////////////////////
+
+    sous array_sauces[4];
+
+    for (int i = 0; i < 4; ++i) {
+
+        cout << "заполните данные " << i + 1 << " соуса" << endl;
+
+        cout << "Введите название: ";
+        cin >> array_sauces[i].name;
+
+        cout << "Введите вкус: ";
+        cin >> array_sauces[i].taste;
+
+        cout << "Введите объем: ";
+        cin >> array_sauces[i].size;
+
+        cout << "соус соленый?: ";
+        cin >> array_sauces[i].salt;
+
+        cout << endl;
+
+    }
+
+    cout << endl;
+
+    ///////////////////////////////////////////////////////
+
+    ofstream out;
+    out.open("sous.txt");
+
+    for (int l = 0; l < 4; ++l) {
+
+        out << "название:" << array_sauces[l].name << " " << endl;
+        out << "вкус:" << array_sauces[l].taste << " " << endl;
+        out << "объем:" << array_sauces[l].size << " " << endl;
+        out << "соленый?: " << array_sauces[l].salt << " " << endl << endl;
+
+    }
+
+    out.close();
+
+    ///////////////////////////////////////////////////////
+
+    ifstream in;
+    in.open("sous.txt");
+
+    string text;
+
+    while (getline(in, text))
+        cout << text << endl;
+
+    in.close();
+
+    //////////////////////////////////////////////////////
+
+}
